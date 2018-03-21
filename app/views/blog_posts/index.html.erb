@@ -1,0 +1,35 @@
+<h1>Current Blog Posts</h1>
+
+
+<div class="row">
+	<% @blog_posts.each do |blog_post| %>
+		<div class='col-md-6'>
+			<div class='panel panel-default'>
+					
+					<%= link_to blog_post.title, blog_post %>
+
+					<!--route: blog_post OR blog_post_path(blog_post)
+
+					-->
+
+			</div>
+
+			<div class="panel-body">
+				by: <%= blog_post.author %><br>
+				<p><i>Created: <%=blog_post.created_at.strftime('%m/%d/%Y at %I:%M%p') %></i></p>
+				<p><%= blog_post.blog_entry[0..150]%>..<%= link_to "Read More", blog_post_path(blog_post) %></p>
+			</div>
+			<div class="panel-footer">
+
+			
+				<%= link_to "Edit", edit_blog_post_path(blog_post), class: "btn btn-warning" %>
+				<%= link_to "Destroy", blog_post_path(blog_post), method: :delete, data: {
+					confirm: "Are you sure?"}, class: "btn btn-danger" %>
+
+		</div>
+	</div>
+</div>
+
+<% end %>
+
+<%= link_to "New Blog Post", new_blog_post_path, class: "btn btn-success" %>
